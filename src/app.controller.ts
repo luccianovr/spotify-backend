@@ -7,8 +7,10 @@ import { Artista } from "./claseArtista/claseArtista";
 @Controller()
 export class AppController {
   artistas: Artista[] = [];
+  canciones: Cancion[] = [];
   constructor(private readonly appService: AppService) {
     this.artistas.push(new Artista(1, "Pink-Floyd", "Tremendísimo Grupo", "Inglaterra", ["Rock"], 12000000, "No sé", true));
+    //this.canciones.push(new Cancion)
   }
 
   @Get()
@@ -31,7 +33,8 @@ export class AppController {
   @Post('artistas')
   nuevoArtista( /* MENSAJE EN EL CUERPO */ @Body() artista: Artista): Artista {
     this.artistas.push(artista);
-    return null;
+    artista.id = this.artistas.length;
+    return artista;
   }
 
   @Get('/canciones')
