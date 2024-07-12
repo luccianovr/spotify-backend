@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Post, Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Cancion } from './claseCancion/claseCancion';
 import { Playlist } from './clasePlaylist/clasePlaylist';
@@ -6,7 +6,10 @@ import { Artista } from "./claseArtista/claseArtista";
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) { }
+  artistas: Artista[] = [];
+  constructor(private readonly appService: AppService) {
+    this.artistas.push(new Artista(1, "Pink-Floyd", "Tremendísimo Grupo", "Inglaterra", ["Rock"], 12000000, "No sé", true));
+  }
 
   @Get()
   getHello(): string {
@@ -20,11 +23,15 @@ export class AppController {
     return 'Hola mundo';
   }
 
-  @Get('/artistas')
+  @Get('artistas')
   crearArtista(): Artista[] {
-    let artista1: Artista = new Artista(0, "Radio-head", "Gran Grupo", "Inglaterra", ["Rock"], 12311111, "No sé", true);
-    let artista2: Artista = new Artista(1, "Pink-Floyd", "Tremendísimo Grupo", "Inglaterra", ["Rock"], 12000000, "No sé", true);
-    return [artista1.getArtista(), artista2.getArtista()];
+    return this.artistas;
+  }
+
+  @Post('artistas')
+  nuevoArtista( /* MENSAJE EN EL CUERPO */ @Body() artista: Artista): Artista {
+    this.artistas.push(artista);
+    return null;
   }
 
   @Get('/canciones')
