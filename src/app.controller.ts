@@ -8,9 +8,11 @@ import { Artista } from "./claseArtista/claseArtista";
 export class AppController {
   artistas: Artista[] = [];
   canciones: Cancion[] = [];
+  playlist: Playlist[] = [];
   constructor(private readonly appService: AppService) {
     this.artistas.push(new Artista(1, "Pink-Floyd", "Tremendísimo Grupo", "Inglaterra", ["Rock"], 12000000, "No sé", true));
     this.canciones.push(new Cancion(1, "Californication", 300, 10000000, ["Funk", "Punk"], "Devio", this.artistas[2]));
+    this.playlist.push(new Playlist("Pa perrear", 1, new Date, this.canciones));
   }
 
   @Get()
@@ -49,18 +51,13 @@ export class AppController {
   }
 
   @Get('/playlists')
-  crearPlaylist(): Playlist[] {
-    let artistaCancion1: Artista = new Artista(0, "Radio-head", "Gran Grupo", "Inglaterra", ["Rock"], 10000000, "No sé", true);
-    let cancion1: Cancion = new Cancion(0, "Jigsaw Falling Into Place", 240, 100221111, ["Rock"], "In Rainbows", artistaCancion1);
+  obtenerPlaylist(): Playlist[] {
+    return this.playlist;
+  }
 
-    let artistaCancion2: Artista = new Artista(1, "Pink-Floyd", "Tremendísimo Grupo", "Inglaterra", ["Rock"], 12000000, "No sé", true);
-    let cancion2: Cancion = new Cancion(1, "Dogs", 1000, 2000, ["Rock"], "Animals", artistaCancion2);
-
-    let canciones: Cancion[] = [cancion1, cancion2];
-    //canciones.push(cancion1, cancion2);
-
-    let playlist1: Playlist = new Playlist("A rockear", 1, new Date, canciones);
-
-    return [playlist1];
+  @Post('playlist')
+  crearPlaylist(@Body() playlist: Playlist): Playlist {
+    this.playlist.push(playlist);
+    return playlist;
   }
 }

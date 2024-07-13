@@ -12,6 +12,10 @@ class Playlist {
         this.fechaCreacion = fechaCreacion;
         this.canciones = canciones;
     }
+
+    getPlaylist(): Playlist {
+        return this;
+    }
 }
 
 export { Playlist };
