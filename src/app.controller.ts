@@ -10,7 +10,7 @@ export class AppController {
   canciones: Cancion[] = [];
   constructor(private readonly appService: AppService) {
     this.artistas.push(new Artista(1, "Pink-Floyd", "Tremendísimo Grupo", "Inglaterra", ["Rock"], 12000000, "No sé", true));
-    //this.canciones.push(new Cancion)
+    this.canciones.push(new Cancion(1, "Californication", 300, 10000000, ["Funk", "Punk"], "Devio", this.artistas[2]));
   }
 
   @Get()
@@ -37,14 +37,15 @@ export class AppController {
     return artista;
   }
 
-  @Get('/canciones')
-  crearCancion(): Cancion[] {
-    let artistaCancion1: Artista = new Artista(0, "Radio-head", "Gran Grupo", "Inglaterra", ["Rock"], 10000000, "No sé", true);
-    let cancion1: Cancion = new Cancion(0, "Jigsaw Falling Into Place", 240, 100221111, ["Rock"], "In Rainbows", artistaCancion1);
+  @Get('canciones')
+  obtenerCanciones(): Cancion[] {
+    return this.canciones;
+  }
 
-    let artistaCancion2: Artista = new Artista(1, "Pink-Floyd", "Tremendísimo Grupo", "Inglaterra", ["Rock"], 12000000, "No sé", true);
-    let cancion2: Cancion = new Cancion(1, "Dogs", 1000, 2000, ["Rock"], "Animals", artistaCancion2);
-    return [cancion1, cancion2];
+  @Post('canciones')
+  crearCancion(@Body() cancion: Cancion): Cancion {
+    this.canciones.push(cancion);
+    return cancion;
   }
 
   @Get('/playlists')

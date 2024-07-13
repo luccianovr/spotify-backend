@@ -18,6 +18,10 @@ class Cancion {
         this.reproducciones = reproducciones;
         this.generoMusical = generoMusical;
     }
+
+    getCancion(): Cancion {
+        return this;
+    }
 }
 
 export { Cancion };
