@@ -6,11 +6,11 @@ class Playlist {
     fechaCreacion: Date;
     canciones: Cancion[];
 
-    constructor(nombre: string, id: number, fechaCreacion: Date, canciones: Cancion[]) {
+    constructor(nombre: string, id: number, fechaCreacion: Date) {
         this.nombre = nombre;
         this.id = id;
         this.fechaCreacion = fechaCreacion;
-        this.canciones = canciones;
+        //this.canciones = canciones;
     }
 
     getPlaylist(): Playlist {

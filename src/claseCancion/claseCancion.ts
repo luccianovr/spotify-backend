@@ -6,12 +6,12 @@ class Cancion {
     duracion: number;
     reproducciones: number;
     generoMusical: string[];
-    artista: Artista;
+    //artista: Artista;
     album: string;
 
-    constructor(id: number, nombre: string, duracion: number, reproducciones: number, generoMusical: string[], album: string, artista: Artista) {
+    constructor(id: number, nombre: string, duracion: number, reproducciones: number, generoMusical: string[], album: string) {
         this.nombre = nombre;
-        this.artista = artista;
+        //this.artista = artista;
         this.album = album;
         this.duracion = duracion;
         this.id = id;
